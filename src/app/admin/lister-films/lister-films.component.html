@@ -1,1 +1,26 @@
-<p>lister-films works!</p>
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let film of tabFilms; let index = index">
+          <td>{{ film.id }}</td>
+          <td>{{ film.nom }}</td>
+          <td>{{ film.description }}</td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="confirmAndDelete(index)">Supprimer</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

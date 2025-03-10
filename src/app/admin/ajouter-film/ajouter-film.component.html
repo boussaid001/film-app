@@ -1,1 +1,9 @@
-<p>ajouter-film works!</p>
+<div class="contenu">
+  <label>Nom du film</label>
+  <input [(ngModel)]="nomFilm" type="text"><br>
+
+  <label>Description du film</label>
+  <input [(ngModel)]="descFilm" type="text"><br>
+
+  <button class="btnInfo" (click)="AjouterFilm(nomFilm, descFilm)">Ajouter</button>
+</div>

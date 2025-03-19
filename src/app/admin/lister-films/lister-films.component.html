@@ -11,12 +11,19 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let film of tabFilms; let index = index">
+        <tr *ngFor="let film of tabFilms">
           <td>{{ film.id }}</td>
           <td>{{ film.nom }}</td>
           <td>{{ film.description }}</td>
           <td>
-            <button type="button" class="btn btn-danger" (click)="confirmAndDelete(index)">Supprimer</button>
+            <!-- Delete Button with safe handling of film.id -->
+            <button type="button" class="btn btn-danger me-1" (click)="confirmAndDelete(film.id ? +film.id : 0)">Supprimer</button>
+
+            <!-- Edit Button -->
+            <button type="button" class="btn btn-primary me-1" (click)="editFilm(film.id ? +film.id : 0)">Éditer</button>
+
+            <!-- View Film Button with safe handling of film.id -->
+            <button type="button" class="btn btn-warning" (click)="goToFilm(film.id ? +film.id : 0)">Voir Film</button>
           </td>
         </tr>
         </tbody>

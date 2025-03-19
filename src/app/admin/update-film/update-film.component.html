@@ -1,0 +1,8 @@
+<div class="contenu">
+  <label>Nom du film</label><br> <input type="text" value="{{nomFilm}}" #name><br>
+  <label>Description du film</label> <br><input type="text" value="{{descFilm}}" #desc><br>
+  <button class="btnInfo" (click)="update(desc.value,name.value)">update</button>
+</div>
+<div>
+  <a routerLink="/admin/liste-films" >retour</a>
+</div>

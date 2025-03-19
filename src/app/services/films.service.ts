@@ -10,30 +10,42 @@ export class FilmsService {
 
   constructor() {}
 
-  // Method to get the films in reverse order
   getFilms(): Film[] {
-    return this.films.slice().reverse();  // Creates a shallow copy and reverses it
+    return this.films.slice().reverse();
   }
 
-  deleteFilm(index: number) {
-    this.films.splice(index, 1);
+  getFilmById(id: number): Film | undefined {
+    return this.films.find(film => film.id !== undefined && +film.id === id);
   }
 
-  AjouterFilm(nom: string, desc: string) {
-    let id: number;
-
-    if (this.films.length === 0) {
-      id = 1;
-    } else {
-      id = Number(this.films[this.films.length - 1].id) + 1;
+  updateFilmById(id: number, desc: string, name: string): boolean {
+    const film = this.getFilmById(id);
+    if (film) {
+      film.description = desc;
+      film.nom = name;
+      return true;
     }
+    return false;
+  }
 
-    let f = new Film();
-    f.id = id.toString();
-    f.nom = nom;  // Assuming `Film` has a `nom` property
-    f.description = desc;
-    f.descVisible = true;
+  AjouterFilm(nom: string, desc: string): void {
+    const maxId = Math.max(...this.films.map(film => film.id ? +film.id : 0));
+    const newId = (maxId + 1).toString();
+    
+    const newFilm: Film = new Film({
+      id: newId,
+      nom: nom,
+      description: desc,
+      descVisible: false
+    });
+    
+    this.films.unshift(newFilm);
+  }
 
-    this.films.push(f);  // Proper way to add an item to an array
+  deleteFilm(id: number): void {
+    const index = this.films.findIndex(film => film.id !== undefined && +film.id === id);
+    if (index !== -1) {
+      this.films.splice(index, 1);
+    }
   }
 }
